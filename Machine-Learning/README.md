@@ -18,7 +18,7 @@
 | Função indicadora | Símbolo blackboard bold | $\mathbb{1}(\cdot)$ |
 | Espaço vetorial real de dimensão $D$ | Símbolo blackboard bold | $\mathbb{R}^D$ |
 | Norma euclidiana | Duplas barras verticais | $\lVert \mathbf{x} - \boldsymbol{\mu} \rVert$ |
-| Gradiente em relação a $\mathbf{w}$ | Nabla com subscrito | $\nabla_{\mathbf{w}}\,\mathcal{L}(\mathbf{w})$ |
+| Gradiente em relação a $\mathbf{w}$ | Nabla com subscrito | $\nabla_{\mathbf{w}}\mathcal{L}(\mathbf{w})$ |
 | Transposta de matriz/vetor | Sobrescrito $\top$ | $\mathbf{X}^\top,\ \mathbf{x}_i^\top$ |
 | Pseudoinversa de Moore-Penrose | Sobrescrito $\dagger$ | $\mathbf{X}^\dagger$ |
 | Vizinhança de $k$ vizinhos de $\mathbf{z}$ | Notação de conjunto com subscrito | $N_k(\mathbf{z})$ |
