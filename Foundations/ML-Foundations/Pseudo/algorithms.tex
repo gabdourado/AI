@@ -181,6 +181,62 @@ conjunto $\mathcal{D}$.
 \end{algorithm}
 
 % ------------------------------------------------------------
+\section{Naive Bayes Classifier}
+% ------------------------------------------------------------
+
+O Classificador Naive Bayes é um algoritmo de aprendizado supervisionado 
+baseado no Teorema de Bayes com a suposição de independência condicional entre 
+os atributos dado a classe. Formalmente, dado um vetor de atributos 
+$\mathbf{x} = (x_1, x_2, \ldots, x_D)$ e um conjunto de classes
+$\mathcal{C} = \{c_1, c_2, \ldots, c_K\}$, o modelo estima:
+
+\begin{equation*}
+  P(y = c_k \mid \mathbf{x}) \;\propto\; P(y = c_k)
+  \prod_{d=1}^{D} P(x_d \mid y = c_k)
+\end{equation*}
+
+A predição é dada pela regra MAP (Maximum A Posteriori):
+
+\begin{equation*}
+  \hat{y} = \underset{c_k \in \mathcal{C}}{\arg\max}
+  \left[ \log P(y = c_k) + \sum_{d=1}^{D} \log P(x_d \mid y = c_k) \right]
+\end{equation*}
+
+\begin{algorithm}[H]
+  \caption{NaiveBayes-Treino}
+  \begin{algorithmic}[1]
+    \Require Conjunto de dados $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$,
+             conjunto de classes $\mathcal{C} = \{c_1, \ldots, c_K\}$
+    \Ensure  Probabilidades a priori $\hat{\pi}_k$ e verossimilhanças $\hat{\theta}_{kd}$
+    \For{cada classe $c_k \in \mathcal{C}$}
+      \State $\mathcal{D}_k \gets \{(\mathbf{x}_i, y_i) \in \mathcal{D} \mid y_i = c_k\}$
+      \State $\hat{\pi}_k \gets \dfrac{|\mathcal{D}_k|}{N}$
+      \For{$d = 1$ \textbf{até} $D$}
+        \State Estimar $\hat{\theta}_{kd} \gets P(x_d \mid y = c_k)$ a partir de $\mathcal{D}_k$
+      \EndFor
+    \EndFor
+    \State \Return $\{\hat{\pi}_k\}$, $\{\hat{\theta}_{kd}\}$
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{NaiveBayes-Predição}
+  \begin{algorithmic}[1]
+    \Require Amostra $\mathbf{z} = (z_1, \ldots, z_D) \in \mathbb{R}^{D}$,
+             parâmetros $\{\hat{\pi}_k\}$ e $\{\hat{\theta}_{kd}\}$
+    \Ensure  Classe predita $\hat{y}$
+    \For{cada classe $c_k \in \mathcal{C}$}
+      \State $s_k \gets \log \hat{\pi}_k$
+      \For{$d = 1$ \textbf{até} $D$}
+        \State $s_k \gets s_k + \log P(\hat{\theta}_{kd})$
+      \EndFor
+    \EndFor
+    \State $\hat{y} \gets \underset{c_k}{\arg\max}\; s_k$
+    \State \Return $\hat{y}$
+  \end{algorithmic}
+\end{algorithm}
+
+% ------------------------------------------------------------
 \section{Decision Trees}
 % ------------------------------------------------------------
 
