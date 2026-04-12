@@ -143,8 +143,7 @@ conjunto $\mathcal{D}$.
 \begin{algorithm}[H]
   \caption{KNN-Treino}
   \begin{algorithmic}[1]
-    \Require Conjunto de dados $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$,
-             onde $\mathbf{x}_i \in \mathbb{R}^{D}$ e $y_i \in \{c_1, \ldots, c_M\}$
+    \Require Conjunto de dados $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$
     \Ensure  Dados armazenados na memória
     \State \Return $\mathcal{D}$
   \end{algorithmic}
@@ -166,8 +165,23 @@ conjunto $\mathcal{D}$.
   \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}[H]
+  \caption{KNN-Predição (Regressão)}
+  \begin{algorithmic}[1]
+    \Require Amostra $\mathbf{z} \in \mathbb{R}^{D}$, inteiro $K \geq 1$,
+             conjunto $\mathcal{D}$ armazenado na memória
+    \Ensure  Classe predita $\hat{y}$
+    \For{$i = 1$ \textbf{até} $N$}
+      \State $d_i \gets \|\mathbf{z} - \mathbf{x}_i\|_2$
+    \EndFor
+    \State $\mathcal{N}_K(\mathbf{z}) \gets$ índices dos $K$ menores valores em $\{d_i\}$
+    \State $\hat{y} \gets \dfrac{1}{k} \displaystyle\sum_{i \in \mathcal{N}_K(\mathbf{z})} \mathbf{x}_i$
+    \State \Return $\hat{y}$
+  \end{algorithmic}
+\end{algorithm}
+
 % ------------------------------------------------------------
-\section{Decision Trees (Classificação)}
+\section{Decision Trees}
 % ------------------------------------------------------------
 
 Consiste em um algoritmo de aprendizado supervisionado usado tanto para problemas de classificação quanto de regressão. 
